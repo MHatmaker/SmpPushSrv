@@ -10,7 +10,7 @@
 
 var express = require('express'),
     fs      = require('fs'),
-    favicon = require('static-favicon'),
+    // favicon = require('static-favicon'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
@@ -228,7 +228,7 @@ urls = (
             layout: false
         });
 
-        self.app.use(favicon());
+        // self.app.use(favicon());
         self.app.use(logger('dev'));
         //app.use(bodyParser());
         self.app.use(bodyParser.json());
