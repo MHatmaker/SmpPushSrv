@@ -31,7 +31,11 @@ var pusherRef = null,
     ],
     seqNo = 0,
     namesLength = userNames.length,
-    wndNameSeqNo = 0;
+    wndNameSeqNo = 0,
+    env = {
+        'host': "localhost",
+        'port': "3035"
+    };
 
 exports.getAuth = function (req, res) {
     "use strict";
@@ -50,6 +54,21 @@ exports.setPusher = function (pshr) {
     console.log("setPusher");
     pusherRef = pshr;
 };
+
+exports.setHostEnvironment = function (host, port) {
+    "use strict";
+    console.log("setHostEnvironment");
+    console.log("host set to " + host + ", port set to " + port);
+    env.host = host;
+    env.port = port;
+    console.log("Host set to " + env.host + ", port set to " + env.port);
+};
+
+exports.getHostEnvironment = function (req, res) {
+    console.log("getHostEnvironment returning");
+    console.log(env.host + ", " + env.port);
+    res.json(env);
+}
 
 exports.getUserName = function (req, res) {
     "use strict";

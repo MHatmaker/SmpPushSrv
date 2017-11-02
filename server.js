@@ -65,6 +65,8 @@ MasherNodeApp = function () {
         //  Set the environment variables we need.
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP  || '127.0.0.1';
         self.port      = process.env.OPENSHIFT_NODEJS_PORT || 3035;
+        // api.setHostEnvironment(self.ipaddress, self.port);
+        api.setHostEnvironment('linkr622-arcadian.rhcloud.com', '8080');
         console.log('listen on:');
         console.log(self.port);
         console.log(self.ipaddress);
@@ -171,6 +173,7 @@ urls = (
         self.routes['/username'] = api.getUserName;
         self.routes['/userid'] = api.getUserId;
         self.routes['/wndseqno'] = api.getNextWindowSeqNo;
+        self.routes['/hostenvironment'] = api.getHostEnvironment;
 
         // self.routes['/pusher/auth'] = api.getAuth;
         self.app.get('/pusher/auth', function (req, res) {
