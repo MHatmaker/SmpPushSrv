@@ -292,8 +292,9 @@ urls = (
             io = require('socket.io').listen(server);
         */
         var server = self.app.listen(self.port, function() {
-                console.log('Our app is running on http://localhost:' + port);
-            });
+                console.log('Our app is running on http://localhost:' + self.port);
+            }),
+            io = require('socket.io').listen(server);
         io.sockets.on('connection', function (socket) {
             console.log('io.sockets.on is connecting?');
         });
