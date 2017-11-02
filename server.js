@@ -291,7 +291,7 @@ urls = (
         var server = self.app.listen(self.port, self.ipaddress),
             io = require('socket.io').listen(server);
         */
-        var server = app.listen(self.port, function() {
+        var server = self.app.listen(self.port, function() {
                 console.log('Our app is running on http://localhost:' + port);
             });
         io.sockets.on('connection', function (socket) {
