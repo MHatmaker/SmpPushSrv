@@ -64,7 +64,7 @@ MasherNodeApp = function () {
     self.setupVariables = function () {
         //  Set the environment variables we need.
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP  || '127.0.0.1';
-        self.port      = process.env.OPENSHIFT_NODEJS_PORT || 3035;
+        self.port      = process.env.port || 8080; //process.env.OPENSHIFT_NODEJS_PORT || 3035;
         // api.setHostEnvironment(self.ipaddress, self.port);
         api.setHostEnvironment('linkr622-arcadian.rhcloud.com', '8080');
         console.log('listen on:');
@@ -287,9 +287,13 @@ urls = (
                         Date(Date.now() ), self.ipaddress, self.port);
         });
          */
+         /*
         var server = self.app.listen(self.port, self.ipaddress),
             io = require('socket.io').listen(server);
-
+        */
+        var server = app.listen(self.port, function() {
+                console.log('Our app is running on http://localhost:' + port);
+            });
         io.sockets.on('connection', function (socket) {
             console.log('io.sockets.on is connecting?');
         });
