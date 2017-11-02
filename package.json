@@ -20,13 +20,13 @@
   "license": "ISC",
   "dependencies": {
     "express": "~4.13.1",
-    "morgan": "3.10.6",
-    "body-parser": "3.10.6",
-    "cookie-parser": "3.10.6",
-    "http": "3.10.6",
+    "morgan": "1.9.0",
+    "body-parser": "1.10.2",
+    "cookie-parser": "1.4.3",
+    "http": "0.0.0",
     "static-favicon": "2.0.0-alpha",
-    "socket.io": "3.10.6",
-    "pusher": "3.10.6",
+    "socket.io": "2.0.4",
+    "pusher": "1.5.1",
     "path": "3.10.6"
   },
   "bugs": {
