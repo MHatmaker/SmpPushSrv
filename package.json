@@ -1,0 +1,31 @@
+{
+  "name": "simpleserver",
+  "version": "1.0.0",
+  "description": "Set up to run on Heroku.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MHatmaker/SmpPushSrv.git"
+  },
+  "keywords": [
+    "heroku",
+    "nodejs",
+    "simpleserver"
+  ],
+  "author": "mhatmaker",
+  "license": "ISC",
+  "dependencies": {
+    "express": "~4.13.1"
+  },
+  "bugs": {
+    "url": "https://github.com/MHatmaker/SmpPushSrv/issues"
+  },
+  "engines": {
+    "node": "6.5.0"
+  },
+  "homepage": "https://github.com/MHatmaker/SmpPushSrv#readme"
+}
