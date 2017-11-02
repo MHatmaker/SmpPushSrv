@@ -19,7 +19,15 @@
   "author": "mhatmaker",
   "license": "ISC",
   "dependencies": {
-    "express": "~4.13.1"
+    "express": "~4.13.1",
+    "morgan": "3.10.6",
+    "body-parser": "3.10.6",
+    "cookie-parser": "3.10.6",
+    "http": "3.10.6",
+    "static-favicon": "3.10.6",
+    "socket.io": "3.10.6",
+    "pusher": "3.10.6",
+    "path": "3.10.6"
   },
   "bugs": {
     "url": "https://github.com/MHatmaker/SmpPushSrv/issues"
