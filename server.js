@@ -184,7 +184,7 @@ urls = (
             var socketId = req.query.socket_id,
                 channel = req.query.channel_name,
                 callback = req.query.callback,
-                auth = JSON.stringify(pusher.auth(socketId, channel)),
+                auth = JSON.stringify(pusher.authenticate(socketId, channel)),
                 cb = callback.replace(/\"/g,"") + "(" + auth + ");";
             res.set({
               "Content-Type": "application/javascript"
@@ -232,7 +232,7 @@ urls = (
         self.app.use(logger('dev'));
         //app.use(bodyParser());
         self.app.use(bodyParser.json());
-        self.app.use(bodyParser.urlencoded());
+        self.app.use(bodyParser.urlencoded({ extended: false }));
         //app.use(methodOverride());
         self.app.use(cookieParser());
         // app.use(express.static(path.join(__dirname, 'public')));
