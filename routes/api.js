@@ -49,7 +49,7 @@ function loadHeaders(req, res) {
  * Headers
  */
     res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
-    res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
+    // res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
     res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
     res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
 
@@ -107,7 +107,7 @@ exports.getUserName = function (req, res) {
         console.log("reset seqNo to zero");
     }
     console.log("return seqNo %s, name %s", seqNo, userNames[seqNo].name);
-    // loadHeaders(req, res);
+    loadHeaders(req, res);
     res.json({'id' : seqNo, 'name' : userNames[seqNo].name});
     seqNo++;
 };
