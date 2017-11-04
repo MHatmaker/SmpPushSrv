@@ -94,7 +94,7 @@ exports.setHostEnvironment = function (host, port) {
 exports.getHostEnvironment = function (req, res) {
     console.log("getHostEnvironment returning");
     console.log(env.host + ", " + env.port);
-    // loadHeaders(req, res);
+    loadHeaders(req, res);
     res.json(env);
 }
 
@@ -122,7 +122,7 @@ exports.getUserId = function (req, res) {
         console.log("reset seqNo to zero");
     }
     console.log("return seqNo %s ", seqNo);
-    // loadHeaders(req, res);
+    loadHeaders(req, res);
     res.json({'id' : seqNo});
     seqNo++;
 };
@@ -133,6 +133,6 @@ exports.getNextWindowSeqNo = function (req, res) {
 
     console.log("return wndNameSeqNo %s ", wndNameSeqNo);
     res.json({'wndNameSeqNo' : wndNameSeqNo});
-    // loadHeaders(req, res);
+    loadHeaders(req, res);
     wndNameSeqNo++;
 };
