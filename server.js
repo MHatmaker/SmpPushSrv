@@ -66,7 +66,7 @@ MasherNodeApp = function () {
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP  || '127.0.0.1';
         self.port      = process.env.PORT || 8080; //process.env.OPENSHIFT_NODEJS_PORT || 3035;
         // api.setHostEnvironment(self.ipaddress, self.port);
-        api.setHostEnvironment('linkr622-arcadian.rhcloud.com', '8080');
+        api.setHostEnvironment('https://maplinkr-simpleserver.herokuapp.com', '8100');
         console.log('listen on:');
         console.log(self.port);
         console.log(self.ipaddress);
