@@ -132,7 +132,7 @@ exports.getNextWindowSeqNo = function (req, res) {
     console.log("API wndNameSeqNo");
 
     console.log("return wndNameSeqNo %s ", wndNameSeqNo);
-    res.json({'wndNameSeqNo' : wndNameSeqNo});
     loadHeaders(req, res);
+    res.json({'wndNameSeqNo' : wndNameSeqNo});
     wndNameSeqNo++;
 };
