@@ -288,8 +288,8 @@ urls = (
                     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
                 });
             });
-        }
-    });
+        });
+    };
 
 
     /**
