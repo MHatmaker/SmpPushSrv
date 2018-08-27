@@ -272,8 +272,8 @@ urls = (
                 let message = {
                     from: 'MapLinkr <mapsyncr@gmail.com>',
                     to: req.body.to,
-                    subject: 'MapLinkr shared map ✔',
-                    text: req.body.body,
+                    subject: req.body.subject,
+                    text: req.body.text,
                     html: '<p><b>MapLinkr</b> click link to open this MapLinkr map in browser</p>'
                 };
 
@@ -289,7 +289,7 @@ urls = (
                 });
             });
         }
-    };
+    });
 
 
     /**
