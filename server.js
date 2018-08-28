@@ -290,7 +290,7 @@ urls = (
                     html: '<p><b>MapLinkr</b> click link to open this MapLinkr map in browser</p>'
                 };
                 console.log('message');
-                console.console.log(message);
+                console.log(message);
 
                 transporter.sendMail(message, (err, info) => {
                     if (err) {
