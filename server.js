@@ -220,8 +220,8 @@ urls = (
                 self.app.get(r, self.getroutes[r]);
             }
         }
-        for (r in self.putroutes) {
-            if (self.putroutes.hasOwnProperty(r)) {
+        for (r in self.postroutes) {
+            if (self.postroutes.hasOwnProperty(r)) {
                 self.app.post(r, self.postroutes[r]);
             }
         }
