@@ -246,10 +246,10 @@ urls = (
         });
 
         self.app.post('/send-email', function (req, res) {
-            nodemailer = require('nodemailer');
+            // nodemailer = require('nodemailer');
 
             // Generate SMTP service account from ethereal.email
-            nodemailer.createTestAccount((err, account) => {
+            nodeMailer.createTestAccount((err, account) => {
                 if (err) {
                     console.error('Failed to create a testing account. ' + err.message);
                     return process.exit(1);
@@ -258,7 +258,7 @@ urls = (
                 console.log('Credentials obtained, sending message...');
 
                 // Create a SMTP transporter object
-                let transporter = nodemailer.createTransport({
+                let transporter = nodeMailer.createTransport({
                     host: account.smtp.host,
                     port: account.smtp.port,
                     secure: account.smtp.secure,
@@ -285,7 +285,7 @@ urls = (
 
                     console.log('Message sent: %s', info.messageId);
                     // Preview only available when sending through an Ethereal account
-                    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+                    console.log('Preview URL: %s', nodeMailer.getTestMessageUrl(info));
                 });
             });
         });
