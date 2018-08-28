@@ -157,27 +157,28 @@ urls = (
 
 
     self.createRoutes = function () {
-        self.routes = { };
+        self.getroutes = {};
+        self.postroutes = {};
 
-        self.routes['/asciimo'] = function (req, res) {
+        self.getroutes['/asciimo'] = function (req, res) {
             var link = "http://i.imgur.com/kmbjB.png";
             res.send("<html><body><img src='" + link + "'></body></html>");
         };
-        self.routes['/indexchannel/:name'] = routesHtml.indexchannel;
+        self.getroutes['/indexchannel/:name'] = routesHtml.indexchannel;
 
-        // self.routes['/'] = function(req, res) {
+        // self.getroutes['/'] = function(req, res) {
             // res.setHeader('Content-Type', 'text/html');
             // res.send(self.cache_get('index.html') );
         // };
 
         // JSON API
-        self.routes['/username'] = api.getUserName;
-        self.routes['/userid'] = api.getUserId;
-        self.routes['/wndseqno'] = api.getNextWindowSeqNo;
-        self.routes['/hostenvironment'] = api.getHostEnvironment;
-        self.routes['/send-email'] = api.postEmail;
+        self.getroutes['/username'] = api.getUserName;
+        self.getroutes['/userid'] = api.getUserId;
+        self.getroutes['/wndseqno'] = api.getNextWindowSeqNo;
+        self.getroutes['/hostenvironment'] = api.getHostEnvironment;
+        self.postroutes['/send-email'] = api.postEmail;
 
-        // self.routes['/pusher/auth'] = api.getAuth;
+        // self.getroutes['/pusher/auth'] = api.getAuth;
         self.app.get('/pusher/auth', function (req, res) {
             console.log('getAuth');
             console.log('%s %s %s', req.method, req.url, req.path);
@@ -196,10 +197,10 @@ urls = (
         // self.app.post('/contact', contact.process);  // Contact form route
 
 
-        // self.routes['/api/MarkdownSimple/:id'] = api.getDoc;
+        // self.getroutes['/api/MarkdownSimple/:id'] = api.getDoc;
 
         // redirect all others to the index (HTML5 history)
-        self.routes['*'] = routesHtml.index;
+        self.getroutes['*'] = routesHtml.index;
     };
 
 
@@ -214,9 +215,14 @@ urls = (
         self.createRoutes();
 
         //  Add handlers for the app (from the routes).
-        for (r in self.routes) {
-            if (self.routes.hasOwnProperty(r)) {
-                self.app.get(r, self.routes[r]);
+        for (r in self.getroutes) {
+            if (self.getroutes.hasOwnProperty(r)) {
+                self.app.get(r, self.getroutes[r]);
+            }
+        }
+        for (r in self.putroutes) {
+            if (self.putroutes.hasOwnProperty(r)) {
+                self.app.post(r, self.postroutes[r]);
             }
         }
         // self.initDB();
