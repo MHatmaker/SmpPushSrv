@@ -249,9 +249,10 @@ urls = (
             // nodemailer = require('nodemailer');
             console.log("req ????");
             console.log(req);
-            console.log(req.body);
-            console.log(req.body.to);
-            console.log(req.body.text);
+            var body = req.body;
+            console.log(body);
+            console.log(body.to);
+            console.log(body.text);
 
             // Generate SMTP service account from ethereal.email
             nodeMailer.createTestAccount((err, account) => {
@@ -276,9 +277,9 @@ urls = (
                 // Message object
                 let message = {
                     from: 'MapLinkr <mapsyncr@gmail.com>',
-                    to: req.body.to,
-                    subject: req.body.subject,
-                    text: req.body.text,
+                    to: body.to,
+                    subject: body.subject,
+                    text: body.text,
                     html: '<p><b>MapLinkr</b> click link to open this MapLinkr map in browser</p>'
                 };
 
