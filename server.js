@@ -248,7 +248,7 @@ urls = (
         self.app.post('/send-email', function (req, res) {
             // nodemailer = require('nodemailer');
             console.log("req ????");
-            console.log(req);
+            console.log(req.Route);
             var body = req.body;
             console.log(body);
             console.log(body.to);
