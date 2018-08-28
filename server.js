@@ -250,6 +250,7 @@ urls = (
             console.log("req.Route");
             console.log(req.Route);
             console.log('req.body');
+            console.log(req.body);
             var body = req.body;
             console.log('body');
             console.log(body);
@@ -257,8 +258,8 @@ urls = (
             console.log(body.to);
             console.log('body.text');
             console.log(body.text);
-            console.log('body.subject');
-            console.log(body.subject);
+            console.log('req.body.subject');
+            console.log(req.body.subject);
 
             // Generate SMTP service account from ethereal.email
             nodeMailer.createTestAccount((err, account) => {
@@ -288,6 +289,8 @@ urls = (
                     text: body.text,
                     html: '<p><b>MapLinkr</b> click link to open this MapLinkr map in browser</p>'
                 };
+                console.log('message');
+                console.console.log(message);
 
                 transporter.sendMail(message, (err, info) => {
                     if (err) {
