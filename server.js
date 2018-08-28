@@ -247,12 +247,18 @@ urls = (
 
         self.app.post('/send-email', function (req, res) {
             // nodemailer = require('nodemailer');
-            console.log("req ????");
+            console.log("req.Route");
             console.log(req.Route);
+            console.log('req.body');
             var body = req.body;
+            console.log('body');
             console.log(body);
+            console.log('body.to');
             console.log(body.to);
+            console.log('body.text');
             console.log(body.text);
+            console.log('body.subject');
+            console.log(body.subject);
 
             // Generate SMTP service account from ethereal.email
             nodeMailer.createTestAccount((err, account) => {
