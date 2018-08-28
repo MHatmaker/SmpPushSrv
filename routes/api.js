@@ -136,3 +136,64 @@ exports.getNextWindowSeqNo = function (req, res) {
     res.json({'wndNameSeqNo' : wndNameSeqNo});
     wndNameSeqNo++;
 };
+
+exports.postEmail = function (req, res) {
+
+    console.log("req.Route");
+    console.log(req.Route);
+    console.log('req.body');
+    console.log(req.body);
+    var body = req.body;
+    console.log('body');
+    console.log(body);
+    console.log('body.body.to');
+    console.log(body.body.to);
+    console.log('body.body.text');
+    console.log(body.body.text);
+    console.log('req.body.subject');
+    console.log(req.body.body.subject);
+
+    // Generate SMTP service account from ethereal.email
+    nodeMailer.createTestAccount((err, account) => {
+        if (err) {
+            console.error('Failed to create a testing account. ' + err.message);
+            return process.exit(1);
+        }
+
+        console.log('Credentials obtained, sending message...');
+
+        // Create a SMTP transporter object
+        let transporter = nodeMailer.createTransport({
+            host: account.smtp.host,
+            port: account.smtp.port,
+            secure: account.smtp.secure,
+            auth: {
+                user: account.user,
+                pass: account.pass
+            }
+        });
+
+        // Message object
+        let message = {
+            from: 'MapLinkr <mapsyncr@gmail.com>',
+            to: body.body.to,
+            subject: body.body.subject,
+            text: body.body.text,
+            html: '<p><b>MapLinkr</b> click link to open this MapLinkr map in browser</p>'
+        };
+        console.log('message');
+        console.log(message);
+        loadHeaders(req, res);
+
+        transporter.sendMail(message, (err, info) => {
+            if (err) {
+                console.log('Error occurred. ' + err.message);
+                return process.exit(1);
+            }
+
+            console.log('Message sent: %s', info.messageId);
+            // Preview only available when sending through an Ethereal account
+            console.log('Preview URL: %s', nodeMailer.getTestMessageUrl(info));
+        });
+    });
+};
