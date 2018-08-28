@@ -254,12 +254,12 @@ urls = (
             var body = req.body;
             console.log('body');
             console.log(body);
-            console.log('body.to');
-            console.log(body.to);
-            console.log('body.text');
-            console.log(body.text);
+            console.log('body.body.to');
+            console.log(body.body.to);
+            console.log('body.body.text');
+            console.log(body.body.text);
             console.log('req.body.subject');
-            console.log(req.body.subject);
+            console.log(req.body.body.subject);
 
             // Generate SMTP service account from ethereal.email
             nodeMailer.createTestAccount((err, account) => {
@@ -284,9 +284,9 @@ urls = (
                 // Message object
                 let message = {
                     from: 'MapLinkr <mapsyncr@gmail.com>',
-                    to: body.to,
-                    subject: body.subject,
-                    text: body.text,
+                    to: body.body.to,
+                    subject: body.body.subject,
+                    text: body.body.text,
                     html: '<p><b>MapLinkr</b> click link to open this MapLinkr map in browser</p>'
                 };
                 console.log('message');
