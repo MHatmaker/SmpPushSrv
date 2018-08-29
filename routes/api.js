@@ -32,10 +32,15 @@ var pusherRef = null,
     seqNo = 0,
     namesLength = userNames.length,
     wndNameSeqNo = 0,
+    nodeMailer = null,
     env = {
         'host': "localhost",
         'port': "3035"
     };
+
+exports function setNodeMailer(nm) {
+    nodeMailer = nm;
+}
 
 function loadHeaders(req, res) {
     var responseSettings = {

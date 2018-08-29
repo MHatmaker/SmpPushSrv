@@ -45,6 +45,7 @@ app_secret = '54546672d0196be97f6a';
 pusher = new Pusher({appId: app_id, key: app_key, secret: app_secret});
 
 api.setPusher(pusher);
+api.setNodeMailer(nodeMailer);
 
 /**
  *  Define the sample application.
