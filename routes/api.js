@@ -159,7 +159,7 @@ exports.postEmail = function (req, res) {
     console.log(req.body.subject);
 
     // Generate SMTP service account from ethereal.email
-    nodeMailer.createTestAccount((err, account) => {
+    async nodeMailer.createTestAccount((err, account) => {
         if (err) {
             console.error('Failed to create a testing account. ' + err.message);
             return process.exit(1);
@@ -191,7 +191,7 @@ exports.postEmail = function (req, res) {
         console.log(message);
         loadHeaders(req, res);
 
-        transporter.sendMail(message, (err, info) => {
+        await transporter.sendMail(message, (err, info) => {
             if (err) {
                 console.log('Error occurred. ' + err.message);
                 return process.exit(1);
