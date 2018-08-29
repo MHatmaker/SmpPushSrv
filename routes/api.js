@@ -38,7 +38,7 @@ var pusherRef = null,
         'port': "3035"
     };
 
-exports function setNodeMailer(nm) {
+exports.setNodeMailer = function(nm) {
     nodeMailer = nm;
 }
 
