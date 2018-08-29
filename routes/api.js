@@ -172,6 +172,7 @@ exports.postEmail = function (req, res) {
             host: account.smtp.host,
             port: account.smtp.port,
             secure: account.smtp.secure,
+            socketTimeout: 15000,
             auth: {
                 user: account.user,
                 pass: account.pass
