@@ -159,7 +159,7 @@ function handleError (res, err ) {
 
 exports.postEmail = function (req, res) {
 
-    let sendEmail = Mailjet.post('send'),
+    let sendEmail = mailJet.post('send'),
         message = {
             'FromName' : 'MapLinkr',
             'FromEmail' : 'MapLinkr <mapsyncr@gmail.com>',
