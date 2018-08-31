@@ -41,6 +41,10 @@ var pusherRef = null,
     apiSecret = process.env.MJ_APIKEY_PRIVATE,
     mailJet = require('node-mailjet').connect(apiKey, apiSecret);
 
+console.log("apiKeys");
+console.log(apiKey);
+console.log(apiSecret);
+
 exports.setNodeMailer = function(nm) {
     nodeMailer = nm;
 }
