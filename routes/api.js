@@ -154,7 +154,7 @@ function handlePostResponse (res, response) {
 
 function handleError (res, err ) {
     console.log('Error occurred. ');
-    console.console.log(err);
+    console.log(err);
     return res.json({'err' : err});
 }
 
@@ -211,7 +211,7 @@ exports.postEmail = function (req, res) {
             text: body.text,
             html: '<p><b>MapLinkr</b> click link to open this MapLinkr map in browser</p>'
         };
-        console.log('message');
+          console.log('message');
         console.log(message);
         loadHeaders(req, res);
 
