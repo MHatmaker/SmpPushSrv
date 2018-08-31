@@ -36,7 +36,10 @@ var pusherRef = null,
     env = {
         'host': "localhost",
         'port': "3035"
-    };
+    },
+    apiKey = process.env.MJ_APIKEY_PUBLIC,
+    apiSecret = process.env.MJ_APIKEY_PRIVATE,
+    mailJet = require('node-mailjet').connect(apiKey, apiSecret);
 
 exports.setNodeMailer = function(nm) {
     nodeMailer = nm;
@@ -142,22 +145,41 @@ exports.getNextWindowSeqNo = function (req, res) {
     wndNameSeqNo++;
 };
 
+function handlePostResponse (res, response) {
+
+    console.log('Message sent: %s', response.body);
+    res.json({'msg' : 'email sent'});
+}
+
+function handleError (res, err ) {
+    console.log('Error occurred. ');
+    console.console.log(err);
+    return res.json({'err' : err});
+}
+
 exports.postEmail = function (req, res) {
 
-    console.log("req.Route");
-    console.log(req.Route);
-    console.log('req.body');
-    console.log(req.body);
-    var body = req.body;
-    console.log('body');
-    console.log(body);
-    console.log('body.to');
-    console.log(body.to);
-    console.log('body.text');
-    console.log(body.text);
-    console.log('req.body.subject');
-    console.log(req.body.subject);
+    let sendEmail = Mailjet.post('send'),
+        message = {
+            'FromName' : 'MapLinkr',
+            'FromEmail' : 'MapLinkr <mapsyncr@gmail.com>',
+            'Recipients ': [body.to],
+            'Subject' : body.subject,
+            'Text-part': body.text,
+            'Html-part': '<p><b>MapLinkr</b> click link to open this MapLinkr map in browser</p>'
+        };
+        console.log('message');
+        console.log(message);
+        loadHeaders(req, res);
 
+        sendEmail
+            .request(emailData)
+                .then((result) ==> handlePostResponse(res, result))
+                .catch((err) => handleError(res, err));
+
+
+
+    /*
     // Generate SMTP service account from ethereal.email
     nodeMailer.createTestAccount((err, account) => {
         if (err) {
@@ -203,4 +225,5 @@ exports.postEmail = function (req, res) {
             res.json({'msg' : 'email sent'});
         });
     });
+    */
 };
