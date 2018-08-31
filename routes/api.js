@@ -27,7 +27,7 @@ var pusherRef = null,
         {'name': 'Mary Sue', 'inuse': 0},
         {'name': 'Joe Don', 'inuse': 0},
         {'name': 'Woody Buck', 'inuse': 0},
-        {'name': 'Jed Clyde', 'inuse': 0},
+        {'name': 'Jed Clyde', 'inuse': 0}
     ],
     seqNo = 0,
     namesLength = userNames.length,
@@ -146,8 +146,9 @@ exports.getNextWindowSeqNo = function (req, res) {
 };
 
 function handlePostResponse (res, response) {
-
-    console.log('Message sent: %s', response.body);
+    console.log("handlePostResponse");
+    console.log(response);
+    // console.log('Message sent: %s', response.body);
     res.json({'msg' : 'email sent'});
 }
 
