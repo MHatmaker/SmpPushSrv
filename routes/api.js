@@ -175,7 +175,7 @@ exports.postEmail = function (req, res) {
         loadHeaders(req, res);
 
         sendEmail
-            .request(emailData)
+            .request(message)
                 .then((result) => handlePostResponse(res, result))
                 .catch((err) => handleError(res, err));
 
