@@ -39,7 +39,7 @@ var pusherRef = null,
     },
     apiKey = process.env.MJ_APIKEY_PUBLIC,
     apiSecret = process.env.MJ_APIKEY_PRIVATE,
-    mailJet = require('node-mailjet').connect(apiKey, apiSecret);
+    mailJet = require('node-mailjet').connect('4e155b7fbfb0d5b744dee17d9dc6b5f8', 'da0319f0d4941353e90ac59c3d6c262a');
 
 console.log("apiKeys");
 console.log(apiKey);
