@@ -163,6 +163,8 @@ function handleError (res, err ) {
 }
 
 exports.postEmail = function (req, res) {
+    console.log('in postEmail');
+    console.log(req.body);
 
     let sendEmail = mailJet.post('send'),
         body = req.body,
@@ -177,6 +179,7 @@ exports.postEmail = function (req, res) {
         console.log('message');
         console.log(message);
         loadHeaders(req, res);
+        console.log("now send to mailjet");
 
         sendEmail
             .request(message)
