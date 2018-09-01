@@ -170,7 +170,7 @@ exports.postEmail = function (req, res) {
         body = req.body,
         message = {
             'FromName' : 'MapLinkr',
-            'FromEmail' : 'pilot@mailjet.com',
+            'FromEmail' : 'MapSyncr@gmail.com',
             'Recipients': [{'Email' : 'michael.hatmaker@gmail.com'}],
             'Subject' : body.subject,
             'Text-part': body.text,
