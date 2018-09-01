@@ -173,8 +173,8 @@ exports.postEmail = function (req, res) {
             'FromEmail' : 'MapSyncr@gmail.com',
             'Recipients': [{'Email' : 'michael.hatmaker@gmail.com'}],
             'Subject' : body.subject,
-            'Text-part': body.text,
-            'Html-part': '<p><b>MapLinkr</b> click link to open this MapLinkr map in browser</p>'
+            // 'Text-part': body.text,
+            'Html-part': body.text + '<p><b>MapLinkr</b> click link to open this MapLinkr map in browser</p>'
         };
         console.log('message');
         console.log(message);
