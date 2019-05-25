@@ -66,7 +66,7 @@ MasherNodeApp = function () {
     self.setupVariables = function () {
         //  Set the environment variables we need.
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP  || '127.0.0.1';
-        self.port      = process.env.PORT || 8080; //process.env.OPENSHIFT_NODEJS_PORT || 3035;
+        self.port      = process.env.PORT || 3000; //process.env.OPENSHIFT_NODEJS_PORT || 3035;
         // api.setHostEnvironment(self.ipaddress, self.port);
         api.setHostEnvironment('https://maplinkr-simpleserver.herokuapp.com', '8100');
         console.log('listen on:');
@@ -177,6 +177,7 @@ urls = (
         self.getroutes['/userid'] = api.getUserId;
         self.getroutes['/wndseqno'] = api.getNextWindowSeqNo;
         self.getroutes['/hostenvironment'] = api.getHostEnvironment;
+        self.getroutes['/authremote/arcgis'] = api.getAuthArcGIS;
         self.postroutes['/send-email'] = api.postEmail;
 
         // self.getroutes['/pusher/auth'] = api.getAuth;

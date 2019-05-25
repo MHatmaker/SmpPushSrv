@@ -1,6 +1,8 @@
 /*global exports */
+/*global document, window, process, request, console, require*/
 
-var pusherRef = null,
+var request = require('request'),
+    pusherRef = null,
     userNames = [
         {'name': 'Billie Sue', 'inuse': 0},
         {'name': 'Billy Bob', 'inuse': 0},
@@ -37,19 +39,23 @@ var pusherRef = null,
         'host': "localhost",
         'port': "3035"
     },
+    ARCGIS_CLIENT_ID = "RIABlR5YsNF9kOcH",
+    ARCGIS_CLIENT_SECRET = "c2be4fb31c054b69842040d6e09df920",
+
     apiKey = process.env.MJ_APIKEY_PUBLIC,
     apiSecret = process.env.MJ_APIKEY_PRIVATE,
+    cbport = process.env.PORT || "3000",
+    hurl = cbport === '3000' ?
+            "http://localhost:3000/auth/arcgis/callback" :
+            "https://agopassport.herokuapp.com:" + cbport + "/auth/arcgis/callback",
     mailJet = require('node-mailjet').connect('4e155b7fbfb0d5b744dee17d9dc6b5f8', 'da0319f0d4941353e90ac59c3d6c262a');
 
 console.log("apiKeys");
 console.log(apiKey);
 console.log(apiSecret);
 
-exports.setNodeMailer = function(nm) {
-    nodeMailer = nm;
-}
-
 function loadHeaders(req, res) {
+    "use strict";
     var responseSettings = {
         "AccessControlAllowOrigin": req.headers.origin,
         "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
@@ -62,8 +68,8 @@ function loadHeaders(req, res) {
  */
     res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
     // res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
-    res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
-    res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
+    res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) || "x-requested-with");
+    res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) || responseSettings.AccessControlAllowMethods);
 
     // if ('OPTIONS' == req.method) {
     //     res.send(200);
@@ -74,6 +80,11 @@ function loadHeaders(req, res) {
     // }
 
 }
+
+exports.setNodeMailer = function (nm) {
+    "use strict";
+    nodeMailer = nm;
+};
 
 exports.getAuth = function (req, res) {
     "use strict";
@@ -88,8 +99,42 @@ exports.getAuth = function (req, res) {
     res.send(auth);
 };
 
-exports.setPusher = function (pshr) {
+exports.getAuthArcGIS = function (req, res) {
     "use strict";
+    console.log("route authremote/arcgis");
+    console.log(ARCGIS_CLIENT_ID);
+    var
+        frm = {
+            'f': 'json',
+            'client_id': ARCGIS_CLIENT_ID,
+            'client_secret': ARCGIS_CLIENT_SECRET,
+            'grant_type': 'client_credentials',
+            'expiration': '1440'
+        };
+    console.log(frm);
+    loadHeaders(req, res);
+    request.post({ url: 'https://www.arcgis.com/sharing/rest/oauth2/token/?client_id=' + ARCGIS_CLIENT_ID + '&client_secret=' + ARCGIS_CLIENT_SECRET +  '&grant_type=client_credentials&expiration=1440&redirect_uri=' + hurl},
+    // request.post({ url: 'https://www.arcgis.com/sharing/rest/oauth2/token/'
+    //     json: true,
+    //     form: frm,
+    //     'headers' : {'Content-Type': 'application/x-www-form-urlencoded'}
+    //   },
+        function (error, response, body) {
+            var jsresp;
+            console.log("returned");
+            console.log(response.body);
+            jsresp = JSON.parse(response.body);
+            console.log("\n\ntoken: " + jsresp.access_token);
+            console.log("\nexpires_in " + jsresp.expires_in);
+            return res.send(jsresp);
+        })
+      // console.log("outer return");
+      // console.log(this.jsresp);
+      // return this.jresp;
+};
+
+exports.setPusher = function (pshr) {
+    //"use strict";
     console.log("setPusher");
     pusherRef = pshr;
 };
