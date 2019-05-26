@@ -2,7 +2,7 @@
 /*global document, window, process, request, console, require*/
 
 var request = require('request'),
-  pusherRef = null,
+    pusherRef = null,
     userNames = [
         {'name': 'Billie Sue', 'inuse': 0},
         {'name': 'Billy Bob', 'inuse': 0},
@@ -45,6 +45,7 @@ var request = require('request'),
     apiKey = process.env.MJ_APIKEY_PUBLIC,
     apiSecret = process.env.MJ_APIKEY_PRIVATE,
     cbport = process.env.PORT || "3000",
+    agoToken = "",
     hurl = cbport === '3000' ?
             "http://localhost:3000/auth/arcgis/callback" :
             "https://agopassport.herokuapp.com:" + cbport + "/auth/arcgis/callback",
@@ -136,10 +137,12 @@ exports.getAuthArcGIS = function (req, res) {
 exports.getItems = function (req, res) {
     "use strict";
     console.log("route listingsremote");
-    let fetchedItems = request.get('');
+    var url = 'https://www.arcgis.com/sharing/rest/content/items/4c3ccb95474c4c4d89ec191d69ba1080?f=json&token='
+        + agoToken,
+        fetchedItems = request.get(url);
     // let fetchedItems = await this.httpClient.get('http://localhost:3000/auth/arcgis/callback').toPromise();
     console.log(fetchedItems);
-    return fetchedItems
+    return fetchedItems;
 }
 
 exports.setPusher = function (pshr) {
