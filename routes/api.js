@@ -140,9 +140,18 @@ exports.getItems = function (req, res) {
     console.log("route listingsremote");
     loadHeaders(req, res);
 
-    var url = 'https://www.arcgis.com/sharing/rest/content/items/4c3ccb95474c4c4d89ec191d69ba1080?f=json&token='
+    var itemsurl = 'https://www.arcgis.com/sharing/rest/content/items/4c3ccb95474c4c4d89ec191d69ba1080?f=json&token='
         + agoToken,
-        fetchedItems = request.get(url);
+        fetchedItems;angular
+    fetchedItems = request.get({url : itemsurl,
+        function (error, response, body) {
+            var jsresp;
+            console.log("returned");
+            console.log(response.body);
+            jsresp = JSON.parse(response.body);
+            return res.send(jsresp);
+
+        });
     // let fetchedItems = await this.httpClient.get('http://localhost:3000/auth/arcgis/callback').toPromise();
     console.log(fetchedItems);
     return fetchedItems;
