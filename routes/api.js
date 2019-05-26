@@ -136,7 +136,7 @@ exports.getAuthArcGIS = function (req, res) {
 exports.getItems = function (req, res) {
     "use strict";
     console.log("route listingsremote");
-    let fetchedItems = request.get('https://maplinkr-simpleserver.herokuapp.com/listingsremote');
+    let fetchedItems = request.get('');
     // let fetchedItems = await this.httpClient.get('http://localhost:3000/auth/arcgis/callback').toPromise();
     console.log(fetchedItems);
     return fetchedItems
