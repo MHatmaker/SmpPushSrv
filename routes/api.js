@@ -2,7 +2,7 @@
 /*global document, window, process, request, console, require*/
 
 var request = require('request'),
-    pusherRef = null,
+  pusherRef = null,
     userNames = [
         {'name': 'Billie Sue', 'inuse': 0},
         {'name': 'Billy Bob', 'inuse': 0},
@@ -132,6 +132,15 @@ exports.getAuthArcGIS = function (req, res) {
       // console.log(this.jsresp);
       // return this.jresp;
 };
+
+exports.getItems = function (req, res) {
+    "use strict";
+    console.log("route listingsremote");
+    let fetchedItems = request.get('https://maplinkr-simpleserver.herokuapp.com/listingsremote');
+    // let fetchedItems = await this.httpClient.get('http://localhost:3000/auth/arcgis/callback').toPromise();
+    console.log(fetchedItems);
+    return fetchedItems
+}
 
 exports.setPusher = function (pshr) {
     //"use strict";

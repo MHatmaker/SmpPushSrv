@@ -178,6 +178,7 @@ urls = (
         self.getroutes['/wndseqno'] = api.getNextWindowSeqNo;
         self.getroutes['/hostenvironment'] = api.getHostEnvironment;
         self.getroutes['/authremote/arcgis'] = api.getAuthArcGIS;
+        self.getroutes['/listingsremote/items'] = api.getItems;
         self.postroutes['/send-email'] = api.postEmail;
 
         // self.getroutes['/pusher/auth'] = api.getAuth;
