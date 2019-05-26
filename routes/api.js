@@ -142,7 +142,7 @@ exports.getItems = function (req, res) {
 
     var itemsurl = 'https://www.arcgis.com/sharing/rest/content/items/4c3ccb95474c4c4d89ec191d69ba1080?f=json&token='
         + agoToken,
-        fetchedItems;angular
+        fetchedItems;
     fetchedItems = request.get({url : itemsurl},
         function (error, response, body) {
             var jsresp;
