@@ -127,6 +127,7 @@ exports.getAuthArcGIS = function (req, res) {
             jsresp = JSON.parse(response.body);
             console.log("\n\ntoken: " + jsresp.access_token);
             console.log("\nexpires_in " + jsresp.expires_in);
+            agoToken = jsresp.access_token;
             return res.send(jsresp);
         })
       // console.log("outer return");
@@ -137,6 +138,7 @@ exports.getAuthArcGIS = function (req, res) {
 exports.getItems = function (req, res) {
     "use strict";
     console.log("route listingsremote");
+
     var url = 'https://www.arcgis.com/sharing/rest/content/items/4c3ccb95474c4c4d89ec191d69ba1080?f=json&token='
         + agoToken,
         fetchedItems = request.get(url);
