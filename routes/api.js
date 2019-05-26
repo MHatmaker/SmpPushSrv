@@ -143,7 +143,7 @@ exports.getItems = function (req, res) {
     var itemsurl = 'https://www.arcgis.com/sharing/rest/content/items/4c3ccb95474c4c4d89ec191d69ba1080?f=json&token='
         + agoToken,
         fetchedItems;angular
-    fetchedItems = request.get({url : itemsurl,
+    fetchedItems = request.get({url : itemsurl},
         function (error, response, body) {
             var jsresp;
             console.log("returned");
@@ -151,7 +151,7 @@ exports.getItems = function (req, res) {
             jsresp = JSON.parse(response.body);
             return res.send(jsresp);
 
-        });
+        })
     // let fetchedItems = await this.httpClient.get('http://localhost:3000/auth/arcgis/callback').toPromise();
     console.log(fetchedItems);
     return fetchedItems;
