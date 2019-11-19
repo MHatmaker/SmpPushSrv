@@ -38,9 +38,9 @@ api = require('./routes/api');
 
 resource = require('express-resource');
 
-app_id = '40938';
-app_key = '5c6bad75dc0dd1cec1a6';
-app_secret = '54546672d0196be97f6a';
+app_id = process.env.PUSHERAPPID;
+app_key = process.env.PUSHERAPPKEY;
+app_secret = process.env.PUSHERAPPSECRET;
 
 pusher = new Pusher({appId: app_id, key: app_key, secret: app_secret});
 
@@ -180,6 +180,7 @@ urls = (
         self.getroutes['/authremote/arcgis'] = api.getAuthArcGIS;
         self.getroutes['/listingsremote'] = api.getItems;
         self.postroutes['/send-email'] = api.postEmail;
+        self.postroutes['/pusherkeys'] = api.getPusherKeys;
 
         // self.getroutes['/pusher/auth'] = api.getAuth;
         self.app.get('/pusher/auth', function (req, res) {
@@ -191,9 +192,9 @@ urls = (
                 channel = req.query.channel_name,
                 callback = req.query.callback,
                 auth = JSON.stringify(pusher.authenticate(socketId, channel)),
-                cb = callback.replace(/\"/g,"") + "(" + auth + ");";
+                cb = callback.replace(/\"/g, "") + "(" + auth + ");";
             res.set({
-              "Content-Type": "application/javascript"
+                "Content-Type": "application/javascript"
             });
             res.send(cb);
         });
@@ -249,7 +250,7 @@ urls = (
         // app.use(express.static(path.join(__dirname, 'public')));
         self.app.use(express.static(__dirname + '/www'));
         //self.app.use(self.app.router);    DEPRECATED
-        self.app.use(function(req, res, next) {
+        self.app.use(function (req, res, next) {
             res.header("Access-Control-Allow-Origin", "http://localhost:8100");
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             next();
@@ -302,7 +303,7 @@ urls = (
         var server = self.app.listen(self.port, self.ipaddress),
             io = require('socket.io').listen(server);
         */
-        var server = self.app.listen(self.port, function() {
+        var server = self.app.listen(self.port, function () {
                 console.log('Our app is running on http://localhost:' + self.port);
             }),
             io = require('socket.io').listen(server);

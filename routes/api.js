@@ -39,21 +39,21 @@ var request = require('request'),
         'host': "localhost",
         'port': "3035"
     },
-    ARCGIS_CLIENT_ID = "RIABlR5YsNF9kOcH",
-    ARCGIS_CLIENT_SECRET = "c2be4fb31c054b69842040d6e09df920",
+    ARCGIS_CLIENT_ID = process.env.ARCGISCLIENTID,
+    ARCGIS_CLIENT_SECRET = process.env.ARCGISCLIENTSECRET,
 
-    apiKey = process.env.MJ_APIKEY_PUBLIC,
-    apiSecret = process.env.MJ_APIKEY_PRIVATE,
+    MJAPIPUBLICKEY = process.env.MJAPIPUBLICKEY,
+    MJAPIPRIVATEKEY = process.env.MJAPIPRIVATEKEY,
     cbport = process.env.PORT || "3000",
     agoToken = "",
     hurl = cbport === '3000' ?
             "http://localhost:3000/auth/arcgis/callback" :
             "https://agopassport.herokuapp.com:" + cbport + "/auth/arcgis/callback",
-    mailJet = require('node-mailjet').connect('4e155b7fbfb0d5b744dee17d9dc6b5f8', 'da0319f0d4941353e90ac59c3d6c262a');
+    mailJet = require('node-mailjet').connect(MJAPIPUBLICKEY, MJAPIPRIVATEKEY);
 
-console.log("apiKeys");
-console.log(apiKey);
-console.log(apiSecret);
+    console.log("apiKeys");
+    console.log(MJAPIPUBLICKEY);
+    console.log(MJAPIPRIVATEKEY);
 
 function loadHeaders(req, res) {
     "use strict";
@@ -124,12 +124,13 @@ exports.getAuthArcGIS = function (req, res) {
             var jsresp;
             console.log("returned");
             console.log(response.body);
+            console.log(error);
             jsresp = JSON.parse(response.body);
             console.log("\n\ntoken: " + jsresp.access_token);
             console.log("\nexpires_in " + jsresp.expires_in);
             agoToken = jsresp.access_token;
             return res.send(jsresp);
-        })
+        });
       // console.log("outer return");
       // console.log(this.jsresp);
       // return this.jresp;
@@ -148,17 +149,18 @@ exports.getItems = function (req, res) {
             var jsresp;
             console.log("returned");
             console.log(response.body);
+            console.log(error);
             jsresp = JSON.parse(response.body);
             return res.send(jsresp);
 
-        })
+        });
     // let fetchedItems = await this.httpClient.get('http://localhost:3000/auth/arcgis/callback').toPromise();
     console.log(fetchedItems);
     return fetchedItems;
-}
+};
 
 exports.setPusher = function (pshr) {
-    //"use strict";
+    "use strict";
     console.log("setPusher");
     pusherRef = pshr;
 };
@@ -173,11 +175,12 @@ exports.setHostEnvironment = function (host, port) {
 };
 
 exports.getHostEnvironment = function (req, res) {
+    "use strict";
     console.log("getHostEnvironment returning");
     console.log(env.host + ", " + env.port);
     loadHeaders(req, res);
     res.json(env);
-}
+};
 
 exports.getUserName = function (req, res) {
     "use strict";
@@ -190,7 +193,7 @@ exports.getUserName = function (req, res) {
     console.log("return seqNo %s, name %s", seqNo, userNames[seqNo].name);
     loadHeaders(req, res);
     res.json({'id' : seqNo, 'name' : userNames[seqNo].name});
-    seqNo++;
+    seqNo += 1;
 };
 
 
@@ -205,7 +208,19 @@ exports.getUserId = function (req, res) {
     console.log("return seqNo %s ", seqNo);
     loadHeaders(req, res);
     res.json({'id' : seqNo});
-    seqNo++;
+    seqNo += 1;
+};
+exports.getPusherKeys = function (req, res) {
+    "use strict";
+    let pusherkeys = {
+      appid : process.env.PUSHERAPPID,
+      appkey : process.env.PUSHERAPPKEY,
+      appsecret : process.env.PUSHERAPPSECRET
+    };
+    console.log("pusherkeys");
+    console.log(pusherkeys);
+    loadHeaders(req, res);
+    res.json("pusherkeys" : pusherkeys);
 };
 
 exports.getNextWindowSeqNo = function (req, res) {
@@ -215,23 +230,26 @@ exports.getNextWindowSeqNo = function (req, res) {
     console.log("return wndNameSeqNo %s ", wndNameSeqNo);
     loadHeaders(req, res);
     res.json({'wndNameSeqNo' : wndNameSeqNo});
-    wndNameSeqNo++;
+    wndNameSeqNo += 1;
 };
 
-function handlePostResponse (res, response) {
+function handlePostResponse(res, response) {
+    "use strict";
     console.log("handlePostResponse");
     console.log(response);
     // console.log('Message sent: %s', response.body);
     res.json({'msg' : 'email sent'});
 }
 
-function handleError (res, err ) {
+function handleError(res, err) {
+    "use strict";
     console.log('Error occurred. ');
     console.log(err);
     return res.json({'err' : err});
 }
 
 exports.postEmail = function (req, res) {
+    "use strict";
     console.log('in postEmail');
     console.log(req.body);
 
