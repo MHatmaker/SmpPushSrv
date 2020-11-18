@@ -1,8 +1,4 @@
 #!/bin/env node
-<<<<<<< HEAD
-
-=======
->>>>>>> 30be9ca19fbb4975e47731569a650c7a72c29655
 //  heroku sample Node application
 
 /*global require, console */
