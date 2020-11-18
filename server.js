@@ -1,5 +1,8 @@
 #!/bin/env node
+<<<<<<< HEAD
 
+=======
+>>>>>>> 30be9ca19fbb4975e47731569a650c7a72c29655
 //  heroku sample Node application
 
 /*global require, console */
@@ -68,7 +71,6 @@ MasherNodeApp = function () {
      */
     self.setupVariables = function () {
         //  Set the environment variables we need.
-
         self.port      = process.env.PORT || 3000;
         api.setHostEnvironment('https://maplinkr-simpleserver.herokuapp.com', '8100');
         console.log('listen on:');

@@ -231,7 +231,7 @@ exports.getPusherKeys = function (req, res) {
     console.log("pusherkeys");
     console.log(pusherkeys);
     loadHeaders(req, res);
-    res.json("pusherkeys" : pusherkeys);
+    res.json({"pusherkeys" : pusherkeys});
 };
 
 exports.getNextWindowSeqNo = function (req, res) {
