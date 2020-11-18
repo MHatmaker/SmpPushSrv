@@ -173,6 +173,7 @@ urls = (
         self.getroutes['/listingsremote'] = api.getItems;
         self.postroutes['/send-email'] = api.postEmail;
         self.getroutes['/pusherkeys'] = api.getPusherKeys;
+        getUserNameQuick = api.getUserNameQuick;
 
         // self.getroutes['/pusher/auth'] = api.getAuth;
         self.app.get('/pusher/auth', function (req, res) {
